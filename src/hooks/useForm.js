@@ -21,7 +21,7 @@ const useForm = (callback, validate, initialProps = {}, customErrors = {}) => {
     //Submits and checks if there are errors in the form and passes it
     const handleSubmit = (event) => {
         if (event) event.preventDefault();
-        setErrors({...validate(values), ...customErrors});
+        setErrors({...customErrors, ...validate(values)});
         setIsSubmitting(true);
     };
 

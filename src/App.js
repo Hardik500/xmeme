@@ -22,7 +22,7 @@ require("dotenv").config();
 function App() {
   //Toggles form display
   const [formVisible, setFormVisibility] = useState(false);
-  
+
   //Switches theme
   const [theme, setTheme] = useState("dark");
 
@@ -59,14 +59,18 @@ function App() {
    * And updates the value of skip
    * */
   const fetchData = async () => {
-    const result = await fetchAllMemes(skipValue, limit);
+    try {
+      const result = await fetchAllMemes(skipValue, limit);
 
-    if (result.length === 0) {
-      setDataAvailability(false);
+      if (result.length === 0) {
+        setDataAvailability(false);
+      }
+
+      setGlobalMemesData([...globalMemes, ...result]);
+      setSkip(skipValue + limit);
+    } catch (error) {
+      toast.error(error.response.data.errorMessage);
     }
-
-    setGlobalMemesData([...globalMemes, ...result]);
-    setSkip(skipValue + limit);
   };
 
 
@@ -92,12 +96,17 @@ function App() {
    * */
 
   const addTheMeme = async ({ id }) => {
-    const result = await fetchAMeme(id);
-    toast.success("Meme added !!");
-    let tempMemes = globalMemes;
-    tempMemes.unshift(result);
-    setGlobalMemesData(tempMemes);
-    toggleForm();
+    try {
+      const result = await fetchAMeme(id);
+      toast.success("Meme added !!");
+      let tempMemes = globalMemes;
+      tempMemes.unshift(result);
+      setGlobalMemesData(tempMemes);
+    } catch (error) {
+      toast.error(error.response.data.errorMessage)
+    } finally {
+      toggleForm();
+    }
   };
 
   /**
@@ -108,13 +117,18 @@ function App() {
    * */
 
   const updateTheMeme = async ({ id, index }) => {
-    const result = await fetchAMeme(id);
-    toast.success("Meme updated 😁");
-    let tempMemes = globalMemes;
-    tempMemes.splice(index, 1);
-    tempMemes.unshift(result);
-    setGlobalMemesData(tempMemes);
-    toggleForm();
+    try {
+      const result = await fetchAMeme(id);
+      toast.success("Meme updated 😁");
+      let tempMemes = globalMemes;
+      tempMemes.splice(index, 1);
+      tempMemes.unshift(result);
+      setGlobalMemesData(tempMemes);
+    } catch (error) {
+      toast.error(error.response.data.errorMessage)
+    } finally {
+      toggleForm();
+    }
   };
 
   /**

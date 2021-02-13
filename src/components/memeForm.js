@@ -41,6 +41,8 @@ export default function MemeForm({
                 updateTheMeme({ id: props.id, index: props.index });
             } catch (error) {
                 toast.error(error.response.data.errorMessage);
+            } finally {
+                setLoading(false);
             }
         } else {
             try {
@@ -48,10 +50,10 @@ export default function MemeForm({
                 addTheMeme({ id });
             } catch (error) {
                 toast.error(error.response.data.errorMessage);
+            } finally {
+                setLoading(false);
             }
         }
-
-        setLoading(false);
     };
 
     const { values, errors, handleChange, handleSubmit } = useForm(
@@ -135,7 +137,7 @@ export default function MemeForm({
                                 </div>
                             </div>
                         </header>
-                        {loading ? <ContentLoader color="#e24c4c"/> :
+                        {loading ? <ContentLoader color="#e24c4c" /> :
                             (
                                 <footer>
                                     <div className="set">
