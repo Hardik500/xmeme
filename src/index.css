@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050118;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.navbar {
+  display: flex;
+  background: #e28640;
+  padding: 15px 20px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: cursive;
+}
+
+.btn-none {
+  background: none;
+  border: none;
+}
+
+.cstm-btn {
+  background: #efeed5;
+  font-size: 20px;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: #130327;
+  font-weight: 700;
+  border: 2px solid #520101;
+  cursor: pointer;
+}
+
+.close-btn {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  background: lightcyan;
+}
+
+.cstm-btn:hover {
+  transition: 0.35s all;
+  transform: scale(1.1);
+}
+
+.theme-btn {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.theme-img {
+  width: 30px;
+}
+
+.signup-container {
+  display: flex;
+  max-width: 1400px;
+  width: 90vw;
+}
+
+.left-container {
+  background: rgb(22, 22, 22);
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.left-container h1 {
+  color: rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  font-size: 24px;
+}
+
+.left-container img {
+  width: 100%;
+}
+
+.right-container {
+  background: #f9c7c2;
+  display: flex;
+  flex: 2;
+  width: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.right-container h1:nth-of-type(1) {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 28px;
+  font-weight: 600;
+}
+.right-container .set {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+}
+.right-container input {
+  border: 2px solid #520101;
+  border-radius: 4px;
+  height: 38px;
+  line-height: 38px;
+  padding-left: 5px;
+  margin: 10px 0;
+}
+.right-container input,
+.right-container label {
+  color: rgba(0, 0, 0, 0.8);
+}
+.right-container header {
+  padding: 40px;
+}
+.right-container label,
+.right-container input {
+  width: 100%;
+}
+
+.right-container footer {
+  align-items: center;
+  background: #fff;
+  display: grid;
+  padding: 5px 40px;
+  border-bottom-right-radius: 10px;
+}
+.right-container footer #submit {
+  width: 100px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.user-name label,
+.meme-caption label,
+.meme-url label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.photo-header {
+  /* display: flex; */
+  text-align: center;
+  /* justify-content: space-between; */
+}
+
+.photo-header h3 {
+  margin: 10px 0 0 0;
+}
+
+.photo-parent {
+  border-radius: 4px;
+}
+
+.photo-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.help {
+  margin: 0 0 5px;
+  color: #a50101;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.addmeme-form {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .right-container {
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .right-container footer {
+    border-bottom-right-radius: 0px;
+  }
+
+  .signup-container {
+    flex-direction: column-reverse;
+    margin-top: 300px;
+    margin-bottom: 15px;
+  }
+}
