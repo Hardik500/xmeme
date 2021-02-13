@@ -1,8 +1,10 @@
 //meme-form
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import { postMeme, patchMeme } from "../utils/api";
 import useForm from "../hooks/useForm";
-import { validate } from "../utils/helper"
+import { ContentLoader } from "./loader";
+import { validate } from "../utils/helper";
 
 // Sets the initial data form form fields
 const initialState = {
@@ -22,6 +24,8 @@ export default function MemeForm({
     let memeUpdated = false;
     let customErrors = {};
 
+    const [loading, setLoading] = useState(false);
+
     // If props are being passed then our meme is getting updated
     if (props) {
         memeUpdated = true;
@@ -29,6 +33,8 @@ export default function MemeForm({
 
     //Handles the submission or updation of meme based on the props
     const submitForm = async () => {
+        setLoading(true);
+
         if (memeUpdated) {
             try {
                 await patchMeme(props.id, values);
@@ -44,6 +50,8 @@ export default function MemeForm({
                 toast.error(error.response.data.errorMessage);
             }
         }
+
+        setLoading(false);
     };
 
     const { values, errors, handleChange, handleSubmit } = useForm(
@@ -54,7 +62,6 @@ export default function MemeForm({
     );
 
     return (
-
         <div>
             <div className="signup-container">
                 <div className="left-container">
@@ -128,19 +135,36 @@ export default function MemeForm({
                                 </div>
                             </div>
                         </header>
-                        <footer>
-                            <div className="set">
-                                <button className="cstm-btn close-btn" onClick={(e) => { e.preventDefault(); toggleForm() }}>
-                                    Close
-                                </button>
+                        {loading ? <ContentLoader color="#e24c4c"/> :
+                            (
+                                <footer>
+                                    <div className="set">
+                                        <button
+                                            className="cstm-btn close-btn"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                toggleForm();
+                                            }}
+                                        >Close</button>
 
-                                {memeUpdated ? (
-                                    <input type="submit" value="Update" className="cstm-btn" id="submit" />
-                                ) : (
-                                        <input type="submit" value="Submit" className="cstm-btn" id="submit" />
-                                    )}
-                            </div>
-                        </footer>
+                                        {memeUpdated ? (
+                                            <input
+                                                type="submit"
+                                                value="Update"
+                                                className="cstm-btn"
+                                                id="submit"
+                                            />
+                                        ) : (
+                                                <input
+                                                    type="submit"
+                                                    value="Submit"
+                                                    className="cstm-btn"
+                                                    id="submit"
+                                                />
+                                            )}
+                                    </div>
+                                </footer>
+                            )}
                     </form>
                 </div>
             </div>

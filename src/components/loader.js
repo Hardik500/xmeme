@@ -4,12 +4,12 @@ import Loader from "react-loader-spinner";
 
 // This file contains the loader components for reusablity purposes
 
-export const ContentLoader = () => {
+export const ContentLoader = ({ color = "#e28640" }) => {
   return (
     <div style={{ textAlign: "center" }}>
       <Loader
         type="Bars"
-        color="#e28640"
+        color={color}
         height={75}
         width={75}
         timeout={3000} //3 secs
