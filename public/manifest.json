@@ -30,7 +30,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "/xmeme",
+  "start_url": "/xmeme/",
   "display": "standalone",
   "theme_color": "#e28640",
   "background_color": "#363537"

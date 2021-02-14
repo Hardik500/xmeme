@@ -61,6 +61,30 @@ registerRoute(
   })
 );
 
+//Cache images
+registerRoute(
+  ({request}) => request.destination === 'image',
+  new CacheFirst({
+    cacheName: 'images',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 24 * 60 * 60, // 1 Days
+      }),
+    ],
+  }),
+);
+
+//Cache JS and stylesheets
+registerRoute(
+  ({request}) => request.destination === 'script' ||
+                 request.destination === 'style',
+  new StaleWhileRevalidate()
+);
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
